@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Products</title>
+</head>
+<body>
+    <h1>Our delicious Menu</h1>
+    {% for meal in meals %}
+    <h2>
+            {{ meal.1 }}
+    </h2>
+    {% for row in item_list %}
+        {{ row.meal }}
+        {{ row.description }}
+    {% endfor %}
+    {% endfor %}
+
+</body>
+</html>

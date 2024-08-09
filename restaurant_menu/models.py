@@ -18,9 +18,9 @@ STATUS: tuple = (
 class Item(models.Model):
     meal = models.CharField(max_length=500, unique=True)  # Com isto, não vou ter valores duplicados
     description = models.CharField(max_length=1000)
-    price = models.DecimalField(decimal_places=2)
+    price = models.DecimalField(decimal_places=2, max_digits=8)
     # É mais inteligente definir choices, pois vai ser sempre igual, as escolhas são limitadas!!!
-    category = models.CharField(choice=MEAL_TYPE)
+    category = models.CharField(choices=MEAL_TYPE, max_length=200)
     # This field establishes a many-to-one relationship between the model that contains this field and the `User` model.
     # This allows you to associate an author with each instance of the model, and retrieve the related `User` instance
     # when needed.
@@ -30,6 +30,8 @@ class Item(models.Model):
     # on_delete=models.SET_NULL permite colocar Null no author
     author = models.ForeignKey(User, on_delete=models.PROTECT)
     status = models.IntegerField(choices=STATUS, default=1)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return 'Menu database'
+        return self.meal
